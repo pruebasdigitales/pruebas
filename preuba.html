@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+
+  const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const puertoPublico = 3001;
+
+app.use(bodyParser.json());
+
+app.post('/procesar-en-publico', (req, res) => {
+  // Procesa el JSON recibido desde el servidor local
+  const jsonEntrada = req.body;
+  
+  // Realiza las modificaciones o procesos necesarios en el JSON
+  const nuevoJson = {
+    mensaje: '¡JSON procesado en el servidor público!',
+    datosModificados: jsonEntrada,
+    respuestaLocal: 'Información adicional para el servidor local',
+  };
+  
+  // Envía el nuevo JSON como respuesta al servidor local
+  res.json(nuevoJson);
+});
+
+app.listen(puertoPublico, () => {
+  console.log(`Servidor público escuchando en http://localhost:${puertoPublico}`);
+});
+</script>
